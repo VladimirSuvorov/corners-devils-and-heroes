@@ -1,0 +1,8 @@
+build
+bin
+libs
+.git
+/.vs
+/CMakeSettings.json
+/resources/Thumbs.db
+.vsp

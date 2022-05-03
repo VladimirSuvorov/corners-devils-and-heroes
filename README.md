@@ -23,9 +23,7 @@ https://user-images.githubusercontent.com/32199420/166568352-34f9d56c-b7ed-4bb0-
 [glbinding](https://github.com/cginternals/glbinding),
 [glm](https://github.com/g-truc/glm),
 [gsl](https://github.com/microsoft/GSL),
-[stb_image](https://github.com/nothings/stb/blob/master/stb_image.h),
-
-.
+[stb_image](https://github.com/nothings/stb/blob/master/stb_image.h).
 
 При нормальных условиях, будучи прописанными в качестве сабмодулей git-а, **должны сами подгрузиться** прямиком в подпапку проекта `/externals`  (кроме stb_image, который вручную помещён в папке `/externals`).
 

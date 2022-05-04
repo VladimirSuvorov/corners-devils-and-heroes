@@ -47,10 +47,9 @@ utitlity_t Minimax(uint32_t depth, bool maximizer, int64_t max_best_score, int64
 
 template<typename Alternative>
 utitlity_t MultithreadedMinimax(bool maximizer, int64_t max_best_score, int64_t min_best_score, AISituation<Alternative>* current_situation) {
-	static_assert(MaxMinimaxThreadCount);
-	if constexpr (MaxMinimaxThreadCount)
-		return maximizer ? InitialMaximizerValue : InitialMinimizerValue;
 	constexpr uint32_t Depth = 0;
+	if constexpr (!MaxMinimaxThreadCount)
+		return Minimax(Depth, maximizer, max_best_score, min_best_score, current_situation);//Recall to singlethreaded version
 	
 
 	if (current_situation->end_game())

@@ -5,7 +5,7 @@
 using namespace std::chrono_literals;
 #if !_DEBUG
 #include <stdio.h>
-#define LOG_INFO 
+#define LOG_INFO(...) 
 #define STRINGIFY_TOCKEN(TOCKEN) #TOCKEN
 #define STRINGIFY_VALUE(EXPRESSION) STRINGIFY_TOCKEN(STRINGIFY_VALUE)
 #define CHECK(...) for(bool v =!(__VA_ARGS__);v;v = false)printf("%s\n", STRINGIFY_VALUE(__VA_ARGS__))

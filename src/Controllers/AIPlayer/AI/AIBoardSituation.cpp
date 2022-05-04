@@ -26,6 +26,8 @@ int64_t AIBoardSituation::evaluate(bool maximizer, int depth)noexcept {
 	auto enemy_max_freedom_value = max_freedom_value(Enemy);
 
 
+
+
 	auto my_average_distance = average_distance_to_goals(My);
 
 	auto enemy_average_distance = average_distance_to_goals(Enemy);
@@ -41,14 +43,16 @@ int64_t AIBoardSituation::evaluate(bool maximizer, int depth)noexcept {
 	constexpr uint16_t OwnDistanceRemainCost = 3500;
 	constexpr uint16_t EnemyDistanceRemainCost = 400;
 
+
+
 	return int32_t(OwnReachedGoalCost * my_reached_goal_count) -
 		int32_t(EnemyReachedGoalCost * enemy_reached_goal_count) +
 		int32_t(EnemyReachedGoalCost * ((std::size(goals_[My]) - my_reached_goal_count))) -
 		int32_t(OwnReachedGoalCost * ((std::size(goals_[Enemy]) - enemy_reached_goal_count))) +
-		int32_t(OwnPawnFreedomCost * my_freedom_value / my_max_freedom_value) -
-		int32_t(EnemyPawnFreedomCost * enemy_freedom_value / enemy_max_freedom_value) +
-		int32_t(OwnPawnFreedomCost * enemy_max_freedom_value / enemy_freedom_value) -
-		int32_t(EnemyPawnFreedomCost * my_max_freedom_value / my_freedom_value) +
+		int32_t(my_max_freedom_value ? (OwnPawnFreedomCost * my_freedom_value / my_max_freedom_value) : 0)-
+		int32_t(enemy_max_freedom_value ? (EnemyPawnFreedomCost * enemy_freedom_value / enemy_max_freedom_value) : 0) +
+		int32_t(enemy_freedom_value ? (OwnPawnFreedomCost * enemy_max_freedom_value / enemy_freedom_value) : 0) -
+		int32_t(my_freedom_value ? (EnemyPawnFreedomCost * my_max_freedom_value / my_freedom_value) : 0) +
 		int32_t(OwnDistanceShortageCost * (16 - my_average_distance)) -
 		int32_t(EnemyDistanceShortageCost * (16 - enemy_average_distance)) +
 		int32_t(OwnDistanceRemainCost * enemy_average_distance) -

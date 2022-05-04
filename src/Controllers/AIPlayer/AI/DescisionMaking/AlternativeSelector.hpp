@@ -87,7 +87,7 @@ struct movable_pawn_info {//important for current move
 		min_approachable_distance = std::min(min_approachable_distance, distance);
 	}
 };
-constexpr size_t MaxCollectInfoThreadCount = 3;
+constexpr size_t MaxCollectInfoThreadCount = 0;
 
 std::vector<movable_pawn_info> CollectInfoAboutMovablePawns(std::span<AIPawnProxy> pawns, std::span<board_cell> goals, std::span<board_cell> obstacles);
 

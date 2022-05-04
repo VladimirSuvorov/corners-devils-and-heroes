@@ -138,6 +138,8 @@ std::vector<movable_pawn_info> CollectInfoAboutMovablePawns(std::span<AIPawnProx
 }
 
 std::vector<movable_pawn_info> MultithreadedCollectInfoAboutMovablePawns(std::span<AIPawnProxy> pawns, std::span<board_cell> goals, std::span<board_cell> obstacles) {
+	if constexpr (!MaxCollectInfoThreadCount)
+		return CollectInfoAboutMovablePawns(pawns, goals, obstacles);
 	std::vector<movable_pawn_info> infos;
 	std::atomic_flag infos_lock = ATOMIC_FLAG_INIT;
 	const size_t infos_required = std::accumulate(std::begin(pawns), std::end(pawns), 0, [obstacles](size_t count, const AIPawnProxy& p)->size_t {

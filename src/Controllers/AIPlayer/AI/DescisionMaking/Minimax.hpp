@@ -31,8 +31,8 @@ public:
 constexpr utitlity_t InitialMaximizerValue = -1000000000;
 constexpr utitlity_t InitialMinimizerValue = 1000000000;
 constexpr utitlity_t DepthPenalty = 10;
-constexpr size_t MaxMinimaxThreadCount = 3;
-constexpr auto MaxMinimaxDepth = 500; //5;//3;//4;// 1; // 3;
+constexpr size_t MaxMinimaxThreadCount = 0;
+constexpr auto MaxMinimaxDepth = 3;
 
 template<typename Alternative>// typical minimax algorithm implementation
 utitlity_t Minimax(uint32_t depth = 0, bool maximizer = false, utitlity_t max_best_score = InitialMaximizerValue, utitlity_t min_best_score = InitialMinimizerValue, AISituation<Alternative>* current_situation = nullptr);

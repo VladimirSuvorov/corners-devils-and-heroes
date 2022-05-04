@@ -16,9 +16,6 @@ using namespace std::chrono_literals;
 #endif
 
 
-//https://habr.com/ru/company/microsoft/blog/459834/
-//https://stackoverflow.com/questions/34632416/conditional-type-alias-definition
-
 
 // DEFINE_SUBTYPE_CHECKER_METAFUNCTION macro makes available template type METAFUNCTION_NAME, that can be used to detect if SUBTYPE_CHECK_FOR is defined in type T.
 //
@@ -46,13 +43,6 @@ namespace std{ // C++ 17 hasn't std::span, but C++ 20 has. To hide that differen
 	using gsl::span;
 }
 
-//deferred предоставляет возможность отложенного создания объектов. 
-//
-// Принцип работы идентичен std::optional, с тем исключением, 
-// что контроль за созданием объёкта полностью на совести разработчика.
-// 
-// Назначение - для создания массива объектов, не имеющих конструктора по умолчанию.
-//
 
 //deffered gives an ability to defferedly create objects.
 //
@@ -145,27 +135,3 @@ deferred<T>::deferred()noexcept {
 	static_assert((sizeof(deferred<T>) == sizeof(T)) && (alignof(deferred<T>) == alignof(T)));
 }
 
-
-
-#if 0
-class fps_test {
-public:
-	void begin()noexcept {
-		start_ = std::chrono::high_resolution_clock::now();
-	}
-	void end()noexcept {
-		++frames_;
-		total_ += (std::chrono::high_resolution_clock::now() - start_);
-	}
-	void print()noexcept {
-		if (total_ - previous_duration_ > 250ms) 
-			LOG_INFO("FPS = %.3f, frames = %d, seconds = %.3f\n", float_t(1000u * frames_) / float_t(total_ / 1ms), frames_, float_t(total_ / 1ms / 1000.f));
-	}
-private:
-	size_t frames_ = 0;
-	std::chrono::high_resolution_clock::time_point start_ = std::chrono::high_resolution_clock::now();
-	std::chrono::high_resolution_clock::duration total_ = 0s;
-	std::chrono::high_resolution_clock::duration previous_duration_ = 0s;
-
-};
-#endif
